@@ -39,12 +39,13 @@
         app:layout_constraintTop_toBottomOf="@+id/et_size" />
 
 
-    <View
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/line"
         android:layout_width="2dp"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/margin_top_dotted_line_odd"
-        android:background="@drawable/dashed_line_vertical"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/dashed_line_vertical"
         app:layout_constraintBottom_toTopOf="@+id/tv_saved_amount"
         app:layout_constraintEnd_toEndOf="@+id/rv_items"
         app:layout_constraintStart_toStartOf="@+id/rv_items"
