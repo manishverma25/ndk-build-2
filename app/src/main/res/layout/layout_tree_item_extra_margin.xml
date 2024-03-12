@@ -34,6 +34,7 @@
         android:layout_height="@dimen/height_recycler_single_item"
         app:cardCornerRadius="@dimen/corner_radius_1"
         app:cardElevation="0dp"
+        app:cardBackgroundColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
