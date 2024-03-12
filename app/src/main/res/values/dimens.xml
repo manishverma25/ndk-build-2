@@ -1,0 +1,33 @@
+<resources>
+    <dimen name="bottom_margin_item">8dp</dimen>
+    <dimen name="extra_bottom_margin_item">30dp</dimen>
+    <dimen name="height_recycler_single_item">40dp</dimen>
+    <dimen name="margin_top_dotted_line_odd">20dp</dimen>
+    <dimen name="margin_top_dotted_even">26dp</dimen>
+    <dimen name="height_with_margin">48dp</dimen>
+    <dimen name="height_with_extra_margin">70dp</dimen>
+
+
+    <dimen name="margin_0">4dp</dimen>
+    <dimen name="margin_1">8dp</dimen>
+    <dimen name="margin_2">12dp</dimen>
+    <dimen name="margin_3">16dp</dimen>
+    <dimen name="margin_4">24dp</dimen>
+    <dimen name="margin_5">32dp</dimen>
+    <dimen name="margin_6">40dp</dimen>
+    <dimen name="margin_7">48dp</dimen>
+    <dimen name="margin_8">52dp</dimen>
+    <dimen name="margin_9">64dp</dimen>
+    <dimen name="margin_10">70dp</dimen>
+    <dimen name="margin_11">84dp</dimen>
+
+    <!-- Defined corner radius to be used for new design format for BG drawables -->
+    <dimen name="corner_radius_1">12dp</dimen>
+    <dimen name="corner_radius_2">20dp</dimen>
+    <dimen name="corner_radius_3">16dp</dimen>
+
+    <dimen name="default_corner_radius">12dp</dimen>
+    <dimen name="default_unpressed_glow_size">5dp</dimen>
+    <dimen name="default_pressed_glow_size">5dp</dimen>
+    <dimen name="default_stroke_size">1.5dp</dimen>
+</resources>

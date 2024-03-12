@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cl_container"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/height_with_margin"
+    android:layout_marginStart="@dimen/margin_3"
+    android:gravity="center_vertical">
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="0dp"
+        android:layout_height="4dp"
+        android:background="@drawable/dashed_line"
+        app:layout_constraintBottom_toBottomOf="@+id/cv_item"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/cv_item"
+        app:layout_constraintTop_toTopOf="@+id/cv_item" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="6dp"
+        android:layout_height="6dp"
+        app:cardBackgroundColor="@color/dot_color"
+        app:cardCornerRadius="3dp"
+        app:layout_constraintBottom_toBottomOf="@+id/cv_item"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/cv_item" />
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_item"
+        android:layout_width="@dimen/height_recycler_single_item"
+        android:layout_height="@dimen/height_recycler_single_item"
+        app:cardCornerRadius="@dimen/corner_radius_1"
+        app:cardElevation="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/tv_label"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/margin_0"
+            app:srcCompat="@drawable/ic_sony_liv" />
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+

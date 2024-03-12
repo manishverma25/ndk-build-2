@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="red">#CC2323</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="dot_color">#02B25E</color>
+    <color name="tp_cta_bg_color_1">#5C2A85</color>  <!--  Active state CTA BG color -->
+    <color name="tp_cta_bg_color_2">#545454</color>  <!--  InActive state CTA BG color -->
+    <color name="tp_cta_bg_color_3">#9F743F</color>  <!--  InActive state CTA BG color -->
+
+
+    <color name="default_background_color">#FF131313</color>
+    <color name="default_glow_color">#FF8CD1B0</color>
+    <color name="default_stroke_color">#FF02B25E</color>
+</resources>
