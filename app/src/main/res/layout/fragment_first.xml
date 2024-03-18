@@ -38,87 +38,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_size" />
 
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/line"
-        android:layout_width="2dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="@dimen/margin_top_dotted_line_odd"
-        android:scaleType="fitXY"
-        app:srcCompat="@drawable/dashed_line_vertical"
-        app:layout_constraintBottom_toTopOf="@+id/tv_saved_amount"
-        app:layout_constraintEnd_toEndOf="@+id/rv_items"
-        app:layout_constraintStart_toStartOf="@+id/rv_items"
-        app:layout_constraintTop_toTopOf="@+id/rv_items" />
-
-
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_items"
-        android:layout_width="150dp"
-        android:layout_height="@dimen/height_with_margin"
-        app:layout_constraintBottom_toTopOf="@+id/gb_see_all"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-
-    <com.tp.recyclertree.CustomGlowTextView
-        android:id="@+id/gb_see_all"
-        android:layout_width="wrap_content"
-        android:layout_height="35dp"
-        android:layout_marginBottom="@dimen/margin_1"
-        android:gravity="center_vertical"
-        android:includeFontPadding="false"
-        android:paddingHorizontal="@dimen/margin_3"
-        android:text="@string/txt_see_all"
-        android:textColor="@color/black"
-        android:textSize="12sp"
-        app:buttonColor="@color/white"
-        app:cornerRadiusGlowButton="@dimen/default_corner_radius"
-        app:glowColor="@color/default_glow_color"
-        app:layout_constraintBottom_toTopOf="@+id/tv_saved_amount"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:pressedGlowSize="@dimen/default_pressed_glow_size"
-        app:strokeColor="@color/default_stroke_color"
-        app:strokeSize="1dp"
-        app:unpressedGlowSize="@dimen/default_unpressed_glow_size" />
-
-    <TextView
-        android:id="@+id/tv_saved_amount"
-        android:layout_width="0dp"
-        android:layout_height="25dp"
-        android:layout_marginHorizontal="@dimen/margin_3"
-        android:background="@drawable/active_icon_cta_bg_1"
-        android:backgroundTint="@color/tp_cta_bg_color_3"
-        android:gravity="center"
-        android:includeFontPadding="false"
-        android:paddingHorizontal="@dimen/margin_3"
-        android:text="@string/txt_saved_1_299"
-        android:textColor="@color/white"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/line_2"
-        app:layout_constraintEnd_toEndOf="@+id/rv_items"
-        app:layout_constraintStart_toStartOf="@+id/rv_items" />
-
-    <View
-        android:id="@+id/line_2"
-        android:layout_width="2dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="10dp"
-        android:background="@color/dot_color"
-        app:layout_constraintBottom_toTopOf="@+id/tv_month"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/tv_month"
+        android:id="@+id/rv_journey"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text="@string/txt_jan"
-        android:textColor="@color/white"
-        android:textSize="14sp"
+        android:background="@color/default_glow_color"
         app:layout_constraintBottom_toBottomOf="parent" />
 
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottie_persona"
+        android:layout_width="@dimen/lottie_size"
+        android:layout_height="@dimen/lottie_size"
+        android:layout_marginStart="@dimen/margin_3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="@dimen/margin_1"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="walking_anim.json"
+        app:lottie_loop="true" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

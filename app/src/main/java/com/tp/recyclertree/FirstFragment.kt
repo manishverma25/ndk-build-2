@@ -1,17 +1,24 @@
 package com.tp.recyclertree
 
+import android.animation.ObjectAnimator
 import android.app.Activity
 import android.content.Context
+import android.content.res.Resources
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewGroup.MarginLayoutParams
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.tp.recyclertree.databinding.FragmentFirstBinding
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+
 
 private const val TAG = "FirstFragment"
 /**
@@ -19,7 +26,10 @@ private const val TAG = "FirstFragment"
  */
 class FirstFragment : Fragment() {
 
+    private val animDelay = 2000L
     private lateinit var binding: FragmentFirstBinding
+    /** Manager class for auto scroll of recycler **/
+    private var tpRecyclerAutoScrollManager: TpRecyclerAutoScrollManager? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,67 +42,94 @@ class FirstFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initView()
         setListener()
-        val listTemp = arrayListOf("1", "2", "3", "4", "5")
-        setAdapter(listItems = listTemp)
+        setJourneyAdapter()
+    }
+
+    private fun initView() {
+        /** Init TP Recycler auto scroll manager
+         * , provide recycler view and use rest values as default
+         *  Make sure to call init this manager object before recycler adapter is set
+         * **/
+//        tpRecyclerAutoScrollManager = TpRecyclerAutoScrollManager(
+//            recyclerView = binding.rvJourney,
+//            itemChangeDelay = TpRecyclerAutoScrollManager.ITEM_CHANGE_DELAY_DEFAULT,
+//            speedPerPixelScrollGeneric = TpRecyclerAutoScrollManager.DEFAULT_SPEED_PIXEL_SCROLL,
+//            speedPerPixelLastItem = TpRecyclerAutoScrollManager.DEFAULT_SPEED_PIXEL_SCROLL_LAST_ITEM,
+//            isSetTouchListenerToPausePlay = true
+//        )
+    }
+
+    private fun checkAndStartAutoScroll() {
+        AppLog.d(TAG, "checkAndStartAutoScroll()")
+        tpRecyclerAutoScrollManager?.startAutoScroll()
+    }
+
+    private var journeyItemList = ArrayList<ArrayList<String>>()
+    private fun setJourneyAdapter() {
+        val listTemp1 = arrayListOf("1", "2", "3", "4", "5")
+        val listTemp2 = arrayListOf("1", "2", "3", "4")
+        val listTemp3 = arrayListOf("1", "2", "3")
+        val listTemp4 = arrayListOf("1", "2")
+        val listTemp5 = arrayListOf("1")
+        journeyItemList = arrayListOf(listTemp1, listTemp2, listTemp3, listTemp4, listTemp5)
+        val adapter = JourneyItemAdapter(journeyItemList)
+        val layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        binding.rvJourney.layoutManager = layoutManager
+        binding.rvJourney.adapter = adapter
+
+//        checkAndStartAutoScroll()
     }
 
     private fun setListener() {
+        binding.etSize.visibility = View.GONE
         binding.tvUpdate.setOnClickListener {
-            activity?.let {
-                hideKeyboard(it, binding.etSize)
+            if(isViewRight) {
+                animateViewRightToLeft()
+            } else {
+                animateViewLeftToRight()
             }
-            val strEdit = binding.etSize.text.toString().trim()
-            val listItems = ArrayList<String>()
-            if(strEdit.isNotEmpty()) {
-                var size = strEdit.toInt()
-                if(size > 8 ) {
-                    size = 8
-                }
-                for(i in 1..size) {
-                    listItems.add("$i")
+
+//            activity?.let {
+//                hideKeyboard(it, binding.etSize)
+//            }
+//            val strEdit = binding.etSize.text.toString().trim()
+//            val listItems = ArrayList<String>()
+//            if(strEdit.isNotEmpty()) {
+//                var size = strEdit.toInt()
+//                if(size > 8 ) {
+//                    size = 8
+//                }
+//                for(i in 1..size) {
+//                    listItems.add("$i")
+//                }
+//            }
+//            setAdapter(listItems)
+        }
+
+
+        binding.rvJourney.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                if(binding.rvJourney.layoutManager is LinearLayoutManager) {
+                    val lastVisibleItem = (binding.rvJourney.layoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
+                    if(lastVisibleItem == (journeyItemList.size - 1)) {
+                        lifecycleScope.launch {
+//                            tpRecyclerAutoScrollManager?.removeScrollHandlerCallback()
+                            animateViewLeftToRight()
+//                            delay(animDelay)
+//                            checkAndStartAutoScroll()
+//                            animateViewRightToLeft()
+                        }
+
+                    }
                 }
             }
-            setAdapter(listItems)
-        }
-    }
 
-    private fun setAdapter(listItems : ArrayList<String>) {
-        val adapter = TreeItemAdapter(listItems)
-        val glm = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-        glm.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
-        glm.reverseLayout = true
-
-        binding.rvItems.layoutManager = glm
-        val marginBottomItem = resources.getDimension(R.dimen.bottom_margin_item).toInt()
-        var marginLine = resources.getDimension(R.dimen.margin_top_dotted_line_odd).toInt()
-        val heightSingleItem = resources.getDimension(R.dimen.height_recycler_single_item).toInt() + marginBottomItem
-        var height = (((listItems.size / 2) + 1) * heightSingleItem)
-
-        Log.d(TAG, "setAdapter() marginBottomItem : $marginBottomItem  heightSingleItem $heightSingleItem height : $height")
-        if(listItems.size%2 == 0) {
-            val extraMarginEvenItem = resources.getDimension(R.dimen.extra_bottom_margin_item).toInt()
-
-            Log.d(TAG, "setAdapter() extraMarginEvenItem : $extraMarginEvenItem ")
-
-            height -= heightSingleItem
-
-            height += extraMarginEvenItem
-
-            marginLine = resources.getDimension(R.dimen.margin_top_dotted_even).toInt()
-        } else {
-
-        }
-        Log.d(TAG, "setAdapter() final height : $height ")
-
-        binding.rvItems.layoutParams.height = height
-
-        val lineParams = binding.line.layoutParams as MarginLayoutParams
-        lineParams.topMargin = marginLine
-
-
-        binding.rvItems.adapter = adapter
-
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+            }
+        })
     }
 
     private fun setAdapterLinear() {
@@ -120,4 +157,60 @@ class FirstFragment : Fragment() {
         }
     }
 
+    private var isViewRight = false
+
+    private fun animateViewLeftToRight() {
+        activity?.let {
+            val floatLength =  (Resources.getSystem().displayMetrics.widthPixels - (resources.getDimension(R.dimen.margin_3).toInt() + resources.getDimension(R.dimen.lottie_size).toInt())).toFloat()
+            ObjectAnimator.ofFloat(binding.lottiePersona, "translationX", floatLength).apply {
+                duration = animDelay
+                start()
+            }
+        }
+        isViewRight = true
+    }
+
+    private fun animateViewRightToLeft() {
+        val displayMetrics = DisplayMetrics()
+        activity?.let {
+            val floatLength =  resources.getDimension(R.dimen.margin_3)
+            ObjectAnimator.ofFloat(binding.lottiePersona, "translationX", floatLength).apply {
+                duration = animDelay
+                start()
+            }
+        }
+        isViewRight = false
+    }
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+        tpRecyclerAutoScrollManager?.removeScrollHandlerCallback()
+        tpRecyclerAutoScrollManager = null
+    }
+
+    override fun onStop() {
+        super.onStop()
+        tpRecyclerAutoScrollManager?.removeScrollHandlerCallback()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        AppLog.d(TAG, "onPause()")
+        tpRecyclerAutoScrollManager?.removeScrollHandlerCallback()
+    }
+
+    private var isFirstTimeResume = true
+    override fun onResume() {
+        super.onResume()
+        AppLog.d(
+            TAG,
+            "onResume() responseData : "
+        )
+
+        if(!isFirstTimeResume) {
+            checkAndStartAutoScroll()
+            isFirstTimeResume = false
+        }
+    }
 }

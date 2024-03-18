@@ -30,4 +30,6 @@
     <dimen name="default_unpressed_glow_size">5dp</dimen>
     <dimen name="default_pressed_glow_size">5dp</dimen>
     <dimen name="default_stroke_size">1.5dp</dimen>
+
+    <dimen name="lottie_size">70dp</dimen>
 </resources>
