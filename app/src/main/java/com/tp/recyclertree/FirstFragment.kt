@@ -47,18 +47,21 @@ class FirstFragment : Fragment() {
         setJourneyAdapter()
     }
 
+    private val itemChangeDelay = 500L
+    private val itemSpeedPerPixel = 2500F
+
     private fun initView() {
         /** Init TP Recycler auto scroll manager
          * , provide recycler view and use rest values as default
          *  Make sure to call init this manager object before recycler adapter is set
          * **/
-//        tpRecyclerAutoScrollManager = TpRecyclerAutoScrollManager(
-//            recyclerView = binding.rvJourney,
-//            itemChangeDelay = TpRecyclerAutoScrollManager.ITEM_CHANGE_DELAY_DEFAULT,
-//            speedPerPixelScrollGeneric = TpRecyclerAutoScrollManager.DEFAULT_SPEED_PIXEL_SCROLL,
-//            speedPerPixelLastItem = TpRecyclerAutoScrollManager.DEFAULT_SPEED_PIXEL_SCROLL_LAST_ITEM,
-//            isSetTouchListenerToPausePlay = true
-//        )
+        tpRecyclerAutoScrollManager = TpRecyclerAutoScrollManager(
+            recyclerView = binding.rvJourney,
+            itemChangeDelay = itemChangeDelay,
+            speedPerPixelScrollGeneric = itemSpeedPerPixel,
+            speedPerPixelLastItem = TpRecyclerAutoScrollManager.DEFAULT_SPEED_PIXEL_SCROLL_LAST_ITEM,
+            isSetTouchListenerToPausePlay = true
+        )
     }
 
     private fun checkAndStartAutoScroll() {
@@ -75,11 +78,9 @@ class FirstFragment : Fragment() {
         val listTemp5 = arrayListOf("1")
         journeyItemList = arrayListOf(listTemp1, listTemp2, listTemp3, listTemp4, listTemp5)
         val adapter = JourneyItemAdapter(journeyItemList)
-        val layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        binding.rvJourney.layoutManager = layoutManager
         binding.rvJourney.adapter = adapter
 
-//        checkAndStartAutoScroll()
+        checkAndStartAutoScroll()
     }
 
     private fun setListener() {
@@ -115,11 +116,11 @@ class FirstFragment : Fragment() {
                     val lastVisibleItem = (binding.rvJourney.layoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
                     if(lastVisibleItem == (journeyItemList.size - 1)) {
                         lifecycleScope.launch {
-//                            tpRecyclerAutoScrollManager?.removeScrollHandlerCallback()
+                            tpRecyclerAutoScrollManager?.removeScrollHandlerCallback()
                             animateViewLeftToRight()
-//                            delay(animDelay)
-//                            checkAndStartAutoScroll()
-//                            animateViewRightToLeft()
+                            delay(animDelay)
+                            checkAndStartAutoScroll()
+                            animateViewRightToLeft()
                         }
 
                     }

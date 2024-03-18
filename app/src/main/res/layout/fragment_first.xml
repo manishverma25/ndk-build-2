@@ -42,7 +42,6 @@
         android:id="@+id/rv_journey"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/default_glow_color"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 
