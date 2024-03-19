@@ -47,8 +47,8 @@ class FirstFragment : Fragment() {
         setJourneyAdapter()
     }
 
-    private val itemChangeDelay = 500L
-    private val itemSpeedPerPixel = 2500F
+    private val itemChangeDelay = 470L
+    private val itemSpeedPerPixel = 2400F
 
     private fun initView() {
         /** Init TP Recycler auto scroll manager
@@ -76,11 +76,16 @@ class FirstFragment : Fragment() {
         val listTemp3 = arrayListOf("1", "2", "3")
         val listTemp4 = arrayListOf("1", "2")
         val listTemp5 = arrayListOf("1")
-        journeyItemList = arrayListOf(listTemp1, listTemp2, listTemp3, listTemp4, listTemp5)
+        val listTemp6 = arrayListOf("1", "2", "3", "4")
+        val listTemp7 = arrayListOf("1", "2", "3")
+        journeyItemList = arrayListOf(listTemp1, listTemp2, listTemp3, listTemp4, listTemp5, listTemp6, listTemp7)
         val adapter = JourneyItemAdapter(journeyItemList)
         binding.rvJourney.adapter = adapter
 
-        checkAndStartAutoScroll()
+        lifecycleScope.launch {
+            delay(1000)
+            checkAndStartAutoScroll()
+        }
     }
 
     private fun setListener() {
