@@ -5,7 +5,9 @@
     <dimen name="margin_top_dotted_line_odd">20dp</dimen>
     <dimen name="margin_top_dotted_even">26dp</dimen>
     <dimen name="height_with_margin">48dp</dimen>
-    <dimen name="height_with_extra_margin">70dp</dimen>
+    <dimen name="tree_item_width">55dp</dimen>
+    <dimen name="tree_item_horizontal_margin">50dp</dimen>
+    <dimen name="extra_bottom_margin_item_custom">22dp</dimen>
 
 
     <dimen name="margin_0">4dp</dimen>
@@ -32,4 +34,6 @@
     <dimen name="default_stroke_size">1.5dp</dimen>
 
     <dimen name="lottie_size">70dp</dimen>
+
+
 </resources>

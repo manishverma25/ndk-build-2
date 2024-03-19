@@ -21,6 +21,7 @@ import kotlinx.coroutines.launch
 
 
 private const val TAG = "FirstFragment"
+
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
@@ -28,6 +29,7 @@ class FirstFragment : Fragment() {
 
     private val animDelay = 2000L
     private lateinit var binding: FragmentFirstBinding
+
     /** Manager class for auto scroll of recycler **/
     private var tpRecyclerAutoScrollManager: TpRecyclerAutoScrollManager? = null
 
@@ -78,7 +80,8 @@ class FirstFragment : Fragment() {
         val listTemp5 = arrayListOf("1")
         val listTemp6 = arrayListOf("1", "2", "3", "4")
         val listTemp7 = arrayListOf("1", "2", "3")
-        journeyItemList = arrayListOf(listTemp1, listTemp2, listTemp3, listTemp4, listTemp5, listTemp6, listTemp7)
+        journeyItemList =
+            arrayListOf(listTemp1, listTemp2, listTemp3, listTemp4, listTemp5, listTemp6, listTemp7)
         val adapter = JourneyItemAdapter(journeyItemList)
         binding.rvJourney.adapter = adapter
 
@@ -91,7 +94,7 @@ class FirstFragment : Fragment() {
     private fun setListener() {
         binding.etSize.visibility = View.GONE
         binding.tvUpdate.setOnClickListener {
-            if(isViewRight) {
+            if (isViewRight) {
                 animateViewRightToLeft()
             } else {
                 animateViewLeftToRight()
@@ -117,9 +120,10 @@ class FirstFragment : Fragment() {
 
         binding.rvJourney.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                if(binding.rvJourney.layoutManager is LinearLayoutManager) {
-                    val lastVisibleItem = (binding.rvJourney.layoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
-                    if(lastVisibleItem == (journeyItemList.size - 1)) {
+                if (binding.rvJourney.layoutManager is LinearLayoutManager) {
+                    val lastVisibleItem =
+                        (binding.rvJourney.layoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
+                    if (lastVisibleItem == (journeyItemList.size - 1)) {
                         lifecycleScope.launch {
                             tpRecyclerAutoScrollManager?.removeScrollHandlerCallback()
                             animateViewLeftToRight()
@@ -152,8 +156,8 @@ class FirstFragment : Fragment() {
                 Context.INPUT_METHOD_SERVICE
             ) as InputMethodManager
             if (field != null) {
-                Log.d(TAG,"hideKeyboard imm $imm")
-                Log.d(TAG,"hideKeyboard field getWindowToken " + field.windowToken)
+                Log.d(TAG, "hideKeyboard imm $imm")
+                Log.d(TAG, "hideKeyboard field getWindowToken " + field.windowToken)
                 field.clearFocus()
                 imm.hideSoftInputFromWindow(field.windowToken, 0)
             }
@@ -167,7 +171,9 @@ class FirstFragment : Fragment() {
 
     private fun animateViewLeftToRight() {
         activity?.let {
-            val floatLength =  (Resources.getSystem().displayMetrics.widthPixels - (resources.getDimension(R.dimen.margin_3).toInt() + resources.getDimension(R.dimen.lottie_size).toInt())).toFloat()
+            val floatLength =
+                (Resources.getSystem().displayMetrics.widthPixels - (resources.getDimension(R.dimen.margin_3)
+                    .toInt() + resources.getDimension(R.dimen.lottie_size).toInt())).toFloat()
             ObjectAnimator.ofFloat(binding.lottiePersona, "translationX", floatLength).apply {
                 duration = animDelay
                 start()
@@ -179,7 +185,7 @@ class FirstFragment : Fragment() {
     private fun animateViewRightToLeft() {
         val displayMetrics = DisplayMetrics()
         activity?.let {
-            val floatLength =  resources.getDimension(R.dimen.margin_3)
+            val floatLength = resources.getDimension(R.dimen.margin_3)
             ObjectAnimator.ofFloat(binding.lottiePersona, "translationX", floatLength).apply {
                 duration = animDelay
                 start()
@@ -214,7 +220,7 @@ class FirstFragment : Fragment() {
             "onResume() responseData : "
         )
 
-        if(!isFirstTimeResume) {
+        if (!isFirstTimeResume) {
             checkAndStartAutoScroll()
             isFirstTimeResume = false
         }
