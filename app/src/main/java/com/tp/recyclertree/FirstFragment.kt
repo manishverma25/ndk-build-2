@@ -86,7 +86,7 @@ class FirstFragment : Fragment() {
         binding.rvJourney.adapter = adapter
 
         lifecycleScope.launch {
-            delay(1000)
+//            delay(1000)
             checkAndStartAutoScroll()
         }
     }
@@ -222,7 +222,7 @@ class FirstFragment : Fragment() {
 
         if (!isFirstTimeResume) {
             checkAndStartAutoScroll()
-            isFirstTimeResume = false
         }
+        isFirstTimeResume = false
     }
 }
