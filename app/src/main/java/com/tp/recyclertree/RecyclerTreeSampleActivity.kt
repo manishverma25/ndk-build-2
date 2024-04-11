@@ -1,7 +1,7 @@
 package com.tp.recyclertree
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -14,8 +14,24 @@ class RecyclerTreeSampleActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityRecyclerTreeSampleBinding
 
+    external fun stringFromJNI(): String
+
+
+
+    companion object {
+        // Used to load the 'samplenative' library on application startup.
+        init {
+            System.loadLibrary("recyclertree")
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val r =  (stringFromJNI())
+
+
+        Log.d("mvv12"," onCreate r : $r" )
 
         binding = ActivityRecyclerTreeSampleBinding.inflate(layoutInflater)
         setContentView(binding.root)
