@@ -48,4 +48,5 @@
     <string name="txt_jan">Jan</string>
     <string name="enter_list_size">Enter List Size</string>
     <string name="update">Update</string>
+    <string name="title_activity_second">SecondActivity</string>
 </resources>

@@ -34,6 +34,7 @@
     <dimen name="default_stroke_size">1.5dp</dimen>
 
     <dimen name="lottie_size">70dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 
 
 </resources>

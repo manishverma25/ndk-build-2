@@ -3,6 +3,7 @@ package com.tp.recyclertree
 import android.animation.ObjectAnimator
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.content.res.Resources
 import android.os.Bundle
 import android.util.DisplayMetrics
@@ -94,11 +95,18 @@ class FirstFragment : Fragment() {
     private fun setListener() {
         binding.etSize.visibility = View.GONE
         binding.tvUpdate.setOnClickListener {
-            if (isViewRight) {
-                animateViewRightToLeft()
-            } else {
-                animateViewLeftToRight()
-            }
+
+            Log.d("mvv1"," tvUpdate ......")
+
+
+
+            val intent  = Intent(requireActivity(), SecondActivity::class.java)
+            startActivity(intent)
+//            if (isViewRight) {
+//                animateViewRightToLeft()
+//            } else {
+//                animateViewLeftToRight()
+//            }
 
 //            activity?.let {
 //                hideKeyboard(it, binding.etSize)
