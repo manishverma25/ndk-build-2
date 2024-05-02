@@ -1,6 +1,8 @@
 package com.tp.recyclertree
 
+import android.content.res.Configuration
 import android.os.Bundle
+import android.util.Log
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -14,6 +16,10 @@ class SecondActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivitySecondBinding
 
+
+//    external fun stringFromJNI2(): String
+external fun initModel(ratio: Float): Long
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -21,6 +27,14 @@ class SecondActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)
+
+//        val r =  (stringFromJNI2())
+//        Log.d("mvv1"," SecondActivity   >>>>  r ${r}")
+
+        val r2 =  (initModel(55f))
+
+
+        Log.d("mvv12"," onCreate r :   ...   r2 ${r2.toString()} .  this ... $this" )
 
         val navController = findNavController(R.id.nav_host_fragment_content_second)
         appBarConfiguration = AppBarConfiguration(navController.graph)

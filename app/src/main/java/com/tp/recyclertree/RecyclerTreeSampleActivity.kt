@@ -14,14 +14,17 @@ class RecyclerTreeSampleActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityRecyclerTreeSampleBinding
 
-    external fun stringFromJNI(): String
+    external fun  stringFromJNI(): String
+//    external fun stringFromJNIO(): String
+
+//    external fun initModel(ratio: Float): Long
 
 
 
     companion object {
         // Used to load the 'samplenative' library on application startup.
         init {
-            System.loadLibrary("recyclertree")
+            System.loadLibrary("timesprime")
         }
     }
 
@@ -29,9 +32,10 @@ class RecyclerTreeSampleActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         val r =  (stringFromJNI())
+//        val r2 =  (initModel(55f))
 
 
-        Log.d("mvv12"," onCreate r : $r" )
+        Log.d("mvv12"," onCreate r : $r  ...    " )
 
         binding = ActivityRecyclerTreeSampleBinding.inflate(layoutInflater)
         setContentView(binding.root)

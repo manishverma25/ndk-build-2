@@ -8,3 +8,18 @@ Java_com_tp_recyclertree_RecyclerTreeSampleActivity_stringFromJNI(
     std::string hello = "sample key value sdcdsvdsvdv ";
     return env->NewStringUTF(hello.c_str());
 }
+
+
+
+
+
+extern "C" JNIEXPORT jlong JNICALL
+Java_com_tp_recyclertree_SecondActivity_initModel(JNIEnv* env,
+                                                              jobject /* this */,
+                                                              jfloat ratio) {
+    return 99;
+}
+
+
+
+
