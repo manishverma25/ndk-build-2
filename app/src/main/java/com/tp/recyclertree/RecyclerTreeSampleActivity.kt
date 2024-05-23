@@ -14,7 +14,7 @@ class RecyclerTreeSampleActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityRecyclerTreeSampleBinding
 
-    external fun  stringFromJNI(): String
+    external fun  stringFromJNI(data: Int): String
 //    external fun stringFromJNIO(): String
 
 //    external fun initModel(ratio: Float): Long
@@ -31,7 +31,7 @@ class RecyclerTreeSampleActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val r =  (stringFromJNI())
+        val r =  (stringFromJNI(1))
 //        val r2 =  (initModel(55f))
 
 
